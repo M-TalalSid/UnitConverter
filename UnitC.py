@@ -707,7 +707,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 # Footer
 st.markdown('<div class="footer">', unsafe_allow_html=True)
-st.markdown("Made with Stremlit ❤️ by Talal Shoaib | UniConvert Pro", unsafe_allow_html=True)
+st.markdown("©2025 Made With Stremlit By Talal Shoaib | UniConvert Pro", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
 
 
