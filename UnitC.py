@@ -10,78 +10,44 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS with simplified light theme
+# Simplified CSS without recursive definitions
 def local_css():
     st.markdown("""
     <style>
-    /* Main theme colors */
-    :root {
-        --primary: #6C63FF;
-        --secondary: #FF6584;
-        --accent: #4CAF50;
-        --background: #f8f9fa;
-        --card: #ffffff;
-        --text: #333333;
-        --text-light: #6c757d;
-    }
-    
     /* Base styles */
     .stApp {
-        background-color: var(--background);
-        color: var(--text);
+        background-color: #f8f9fa;
+        color: #333333;
     }
     
     /* Cards */
     .card {
-        background-color: var(--card);
+        background-color: white;
         border-radius: 15px;
         padding: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* Headings */
-    h1, h2, h3 {
-        color: var(--primary);
-        font-weight: 700;
     }
     
     /* Buttons */
-    .stButton>button {
-        background-color: var(--primary);
+    .stButton > button {
+        background-color: #6C63FF;
         color: white;
         border-radius: 10px;
         padding: 10px 20px;
         font-weight: 600;
         border: none;
-        transition: all 0.3s ease;
-    }
-    
-    .stButton>button:hover {
-        background-color: var(--secondary);
-        transform: scale(1.05);
     }
     
     /* Input fields */
-    .stNumberInput>div>div>input {
-        border-radius: 10px;
-        border: 2px solid var(--primary);
-    }
-    
-    /* Select boxes */
-    .stSelectbox>div>div {
+    .stNumberInput > div > div > input,
+    .stSelectbox > div > div {
         border-radius: 10px;
     }
     
     /* Result display */
     .result-display {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        background: linear-gradient(135deg, #6C63FF, #FF6584);
         color: white;
         padding: 20px;
         border-radius: 15px;
@@ -89,129 +55,123 @@ def local_css():
         font-size: 24px;
         font-weight: 700;
         margin: 20px 0;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
     
-    /* History item */
+    /* History items */
     .history-item {
         background-color: rgba(255, 255, 255, 0.03);
-        padding: 0.75rem 1rem;
-        border-radius: 0.5rem;
-        margin-bottom: 0.5rem;
-        border-left: 3px solid var(--primary);
-        transition: all 0.3s ease;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        border-left: 3px solid #6C63FF;
         color: #E0E0E0;
-    }
-    
-    .history-item:hover {
-        transform: translateX(5px);
-        border-left: 3px solid var(--secondary);
-        background-color: rgba(255, 255, 255, 0.05);
     }
     
     /* Formula display */
     .formula-display {
-        background-color: var(--card);
-        border-left: 5px solid var(--accent);
+        background-color: white;
+        border-left: 5px solid #4CAF50;
         padding: 15px;
         border-radius: 10px;
         font-family: monospace;
         margin: 15px 0;
-        overflow-x: auto;
     }
     
-    /* Logo styling */
+    /* Logo */
     .logo-text {
         font-size: 28px;
         font-weight: 800;
-        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        background: linear-gradient(45deg, #6C63FF, #FF6584);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin-bottom: 20px;
-        display: inline-block;
     }
     
-    /* Unit type icons */
+    /* Unit icons */
     .unit-icon {
-        font-size: 48px;
+        font-size: 42px;
         text-align: center;
         margin: 20px 0;
-        position: relative;
     }
     
     .unit-icon h3 {
         color: #E0E0E0;
-        font-size: 1.1rem;
+        font-size: 16px;
         font-weight: 600;
-        margin-top: 0.5rem;
-        text-shadow: 0 0 10px rgba(108, 99, 255, 0.5);
+        margin-top: 8px;
         background: rgba(0, 0, 0, 0.2);
-        padding: 0.3rem 0.8rem;
-        border-radius: 1rem;
+        padding: 6px 12px;
+        border-radius: 16px;
         display: inline-block;
     }
     
-    /* Sidebar section headers */
-    .sidebar .stMarkdown h3 {
-        color: #E0E0E0;
-        font-size: 1.2rem;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        padding: 0.5rem 1rem;
-        background: linear-gradient(90deg, 
-            rgba(108, 99, 255, 0.1) 0%,
-            rgba(0, 0, 0, 0) 100%);
-        border-radius: 0.5rem;
-        margin: 1rem 0;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Mobile optimization */
+    @media (max-width: 768px) {
+        .card {
+            padding: 15px;
+        }
+        
+        .result-display {
+            font-size: 20px;
+            padding: 15px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+        }
+        
+        .unit-icon {
+            font-size: 36px;
+        }
     }
-    
-    /* Footer */
-    .footer {
-        text-align: center;
-        padding: 20px;
-        font-size: 14px;
-        color: var(--text-light);
-        margin-top: 30px;
-    }
-    /* Sidebar headings */
-    .sidebar .stMarkdown h3 {
-        color: #E0E0E0;
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        letter-spacing: 0.5px;
-    }
-    
+    /* Enhanced Recent Conversions Header */
     .recent-conversions-header {
+        background: linear-gradient(90deg, rgba(108, 99, 255, 0.2) 0%, rgba(108, 99, 255, 0.1) 100%);
+        padding: 12px 16px;
+        border-radius: 10px;
+        margin: 1rem 0;
+        border-left: 4px solid #6C63FF;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 0.75rem;
-        margin: 1rem -0.75rem;
-        background: linear-gradient(90deg, 
-            rgba(108, 99, 255, 0.15) 0%,
-            rgba(0, 0, 0, 0) 100%);
-        border-radius: 0.5rem;
+        gap: 8px;
+    }
+    
+    .recent-conversions-header h3 {
+        color: #FFFFFF;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0;
+        letter-spacing: 0.5px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     
     .recent-conversions-header .icon {
         font-size: 1.2rem;
+        color: #6C63FF;
         opacity: 0.9;
     }
     
-    .recent-conversions-header h3 {
-        color: #E0E0E0;
-        font-size: 1.2rem;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        margin: 0;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Mobile optimization */
+    @media (max-width: 768px) {
+        .recent-conversions-header {
+            padding: 10px 14px;
+        }
+        
+        .recent-conversions-header h3 {
+            font-size: 1.1rem;
+        }
     }
     </style>
     """, unsafe_allow_html=True)
 
 local_css()
+
+# Detect mobile devices (simplified version)
+def is_mobile():
+    try:
+        return st.session_state.get('is_mobile', False)
+    except:
+        return False
 
 # Define conversion functions and formulas
 def convert_length(value, from_unit, to_unit):
@@ -342,12 +302,6 @@ def convert_speed(value, from_unit, to_unit):
     formula = f"{value} {from_unit} × ({conversions[to_unit]}/{conversions[from_unit]})"
     return value * conversions[to_unit] / conversions[from_unit], formula
 
-def swap_units():
-    temp = st.session_state.from_unit
-    st.session_state.from_unit = st.session_state.to_unit
-    st.session_state.to_unit = temp
-
-# Add these new conversion functions after the existing ones
 def convert_energy(value, from_unit, to_unit):
     conversions = {
         'joule': 1,
@@ -400,6 +354,11 @@ def convert_frequency(value, from_unit, to_unit):
     }
     formula = f"{value} {from_unit} × ({conversions[to_unit]}/{conversions[from_unit]})"
     return value * conversions[from_unit] / conversions[to_unit], formula
+
+def swap_units():
+    temp = st.session_state.from_unit
+    st.session_state.from_unit = st.session_state.to_unit
+    st.session_state.to_unit = temp
 
 # Initialize session state variables
 if 'history' not in st.session_state:
@@ -503,6 +462,8 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("---")
+    
+    # Update the Recent Conversions header HTML in the sidebar section
     st.markdown("""
         <div class="recent-conversions-header">
             <span class="icon">📋</span>
@@ -560,7 +521,15 @@ elif selected_unit == "Frequency":
 
 # Card for input
 st.markdown('<div class="card animate-fade-in">', unsafe_allow_html=True)
-col1, col2, col3 = st.columns([2, 1, 2])
+
+# Optimize layout for mobile
+if is_mobile():
+    column_ratio = [1, 0.5, 1]  # Adjusted ratios for mobile
+else:
+    column_ratio = [2, 1, 2]  # Original ratios for desktop
+
+# Update the main content layout
+col1, col2, col3 = st.columns(column_ratio)
 
 with col1:
     from_unit = st.selectbox("From", units, key="from_unit_select", index=units.index(st.session_state.from_unit) if st.session_state.from_unit in units else 0)
@@ -641,8 +610,7 @@ st.markdown("### Quick Reference")
 
 if selected_unit == "Length":
     reference_data = {
-        "Unit": ["meter", "kilometer", "inch", "foot", "mile"],
-        "Equivalent": ["1 meter", "1000 meters", "0.0254 meters", "0.3048 meters", "1609.34 meters"]
+        "Unit": ["meter", "kilometer", "inch", "foot", "mile"],        "Equivalent": ["1 meter", "1000 meters", "0.0254 meters", "0.3048 meters", "1609.34 meters"]
     }
 elif selected_unit == "Weight":
     reference_data = {
@@ -710,9 +678,26 @@ st.markdown('<div class="footer">', unsafe_allow_html=True)
 st.markdown("©2025 Made With Stremlit By Talal Shoaib | UniConvert Pro", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
 
-
-
 # Easter egg - hidden feature
 if st.session_state.history and len(st.session_state.history) > 3:
     st.markdown('<div style="text-align: center; margin-top: 20px; font-size: 12px; color: var(--text-light);">🎉 You\'ve unlocked dark mode pro! Keep converting!</div>', unsafe_allow_html=True)
+
+# Add touch feedback for buttons
+def add_touch_feedback():
+    st.markdown("""
+        <script>
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.addEventListener('touchstart', () => {
+                button.style.transform = 'scale(0.98)';
+            });
+            button.addEventListener('touchend', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+        </script>
+    """, unsafe_allow_html=True)
+
+# Call the touch feedback function
+add_touch_feedback()
 
